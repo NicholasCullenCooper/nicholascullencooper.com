@@ -1,0 +1,199 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/jetbrains-mono';
+
+/* Dark-mode variant keys off [data-theme="dark"] instead of the media query,
+   so the user's toggle wins over system preference. Initial value is set by
+   an inline bootstrap script in app.html (reads localStorage before paint). */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+	/* Typography — see DESIGN-IDENTITY.md §2.1 */
+	--font-serif:
+		'Sentient', 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
+	--font-sans:
+		'Switzer', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+		sans-serif;
+	--font-mono:
+		'JetBrains Mono Variable', ui-monospace, 'SF Mono', Menlo, Monaco, 'Cascadia Mono', Consolas,
+		monospace;
+
+	/* Color — light mode (canonical default). See DESIGN-IDENTITY.md §2.2 */
+	--color-paper: #fdfbf6;
+	--color-ink: #1a1716;
+	--color-ink-muted: #6b655f;
+	--color-rule: #c9c1b1;
+	--color-accent: #c14a2a;
+	--color-accent-ink: #ffffff;
+
+	/* Motion — see DESIGN-IDENTITY.md §2.3 */
+	--ease-editorial: cubic-bezier(0.2, 0.8, 0.2, 1);
+	--duration-quick: 240ms;
+	--duration-medium: 320ms;
+	--duration-slow: 480ms;
+}
+
+/* Dark-mode overrides — applied when <html data-theme="dark"> */
+[data-theme='dark'] {
+	--color-paper: #17140f;
+	--color-ink: #f5f1e8;
+	--color-ink-muted: #9a958c;
+	--color-rule: #312b24;
+	--color-accent: #e37a5a;
+	--color-accent-ink: #17140f;
+}
+
+html {
+	color-scheme: light;
+}
+
+[data-theme='dark'] {
+	color-scheme: dark;
+}
+
+body {
+	background-color: var(--color-paper);
+	color: var(--color-ink);
+	font-family: var(--font-serif);
+	font-feature-settings: 'onum', 'kern';
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+a {
+	color: inherit;
+	text-decoration: underline;
+	text-decoration-color: var(--color-rule);
+	text-decoration-thickness: 1px;
+	text-underline-offset: 3px;
+	transition:
+		text-decoration-color var(--duration-quick) var(--ease-editorial),
+		color var(--duration-quick) var(--ease-editorial);
+}
+
+a:hover {
+	text-decoration-color: var(--color-accent);
+	color: var(--color-accent);
+}
+
+a:focus-visible {
+	outline: 2px solid var(--color-accent);
+	outline-offset: 3px;
+	border-radius: 2px;
+	text-decoration-color: var(--color-accent);
+}
+
+.small-caps {
+	font-family: var(--font-sans);
+	font-variant-caps: all-small-caps;
+	letter-spacing: 0.08em;
+	font-weight: 500;
+}
+
+.rule {
+	border: 0;
+	border-top: 1px solid var(--color-rule);
+	margin: 0;
+}
+
+.drop-cap::first-letter {
+	font-family: var(--font-serif);
+	font-size: 4.2em;
+	line-height: 0.85;
+	float: left;
+	padding-right: 0.08em;
+	padding-top: 0.08em;
+	color: var(--color-accent);
+	font-weight: 500;
+}
+
+/* Essay body styling — mdsvex output. Drop cap applies only to the first paragraph. */
+.prose-essay > p:first-of-type::first-letter {
+	font-family: var(--font-serif);
+	font-size: 4em;
+	line-height: 0.85;
+	float: left;
+	padding-right: 0.08em;
+	padding-top: 0.08em;
+	color: var(--color-accent);
+	font-weight: 500;
+}
+
+.prose-essay h2 {
+	font-family: var(--font-serif);
+	font-size: 1.75rem;
+	font-weight: 500;
+	line-height: 1.2;
+	margin-top: 2.5rem;
+	letter-spacing: -0.01em;
+}
+
+.prose-essay h3 {
+	font-family: var(--font-serif);
+	font-size: 1.375rem;
+	font-weight: 500;
+	line-height: 1.3;
+	margin-top: 2rem;
+}
+
+.prose-essay blockquote {
+	font-style: italic;
+	border-left: 2px solid var(--color-accent);
+	padding-left: 1.5rem;
+	margin: 1.5rem 0;
+	color: var(--color-ink-muted);
+}
+
+.prose-essay code {
+	font-family: var(--font-mono);
+	font-size: 0.9em;
+	padding: 0.1em 0.3em;
+	background-color: color-mix(in oklab, var(--color-rule) 30%, transparent);
+	border-radius: 2px;
+}
+
+.prose-essay pre {
+	font-family: var(--font-mono);
+	font-size: 0.875rem;
+	padding: 1rem 1.25rem;
+	background-color: color-mix(in oklab, var(--color-rule) 25%, transparent);
+	border-radius: 4px;
+	overflow-x: auto;
+	margin: 1.5rem 0;
+}
+
+.prose-essay pre code {
+	background: none;
+	padding: 0;
+}
+
+.prose-essay ul,
+.prose-essay ol {
+	padding-left: 1.5rem;
+	margin: 1rem 0;
+}
+
+.prose-essay ul li {
+	list-style: disc;
+}
+
+.prose-essay ol li {
+	list-style: decimal;
+}
+
+.prose-essay hr {
+	border: 0;
+	border-top: 1px solid var(--color-rule);
+	margin: 2.5rem auto;
+	width: 30%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}

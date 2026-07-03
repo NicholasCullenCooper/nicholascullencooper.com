@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+	<rect width="32" height="32" fill="#18181b" />
+	<text
+		x="50%"
+		y="50%"
+		text-anchor="middle"
+		dominant-baseline="central"
+		fill="#fafafa"
+		font-family="Georgia, serif"
+		font-size="18"
+		font-style="italic"
+	>n</text>
+</svg>

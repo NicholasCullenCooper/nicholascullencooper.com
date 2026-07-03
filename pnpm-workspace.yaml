@@ -1,0 +1,7 @@
+packages:
+  - 'web'
+  - 'studio'
+
+onlyBuiltDependencies:
+  - '@tailwindcss/oxide'
+  - esbuild

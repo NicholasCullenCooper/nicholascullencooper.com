@@ -1,0 +1,25 @@
+{
+	"name": "nicholascullencooper-com",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "pnpm --filter web dev",
+		"build": "pnpm --filter web build",
+		"preview": "pnpm --filter web preview",
+		"check": "pnpm --filter web check",
+		"test": "pnpm --filter web test",
+		"test:unit": "pnpm --filter web test:unit",
+		"test:e2e": "pnpm --filter web test:e2e",
+		"studio": "pnpm --filter studio dev",
+		"studio:build": "pnpm --filter studio build",
+		"studio:deploy": "pnpm --filter studio deploy",
+		"lint": "oxlint",
+		"fmt": "oxfmt",
+		"fmt:check": "oxfmt --check"
+	},
+	"devDependencies": {
+		"oxfmt": "^0.45.0",
+		"oxlint": "^1.60.0"
+	}
+}
